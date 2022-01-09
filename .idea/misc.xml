@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_arrow_down_solid.xml" value="0.39114583333333336" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_arrow_up_solid.xml" value="0.39114583333333336" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_calendar_alt_solid.xml" value="0.3828125" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_dumbbell_solid.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_ellipsis_v_solid.xml" value="0.39114583333333336" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_equals_solid.xml" value="0.39114583333333336" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_home_solid.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/drawable/ic_user_solid.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/ejercicio_layout.xml" value="0.27853260869565216" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/list_ejercicio.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/list_rutina_layout.xml" value="0.33" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/vInicio.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_entrenamiento.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_inicio.xml" value="0.33" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_progreso.xml" value="0.27853260869565216" />
+        <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_usuario.xml" value="0.2957427536231884" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
