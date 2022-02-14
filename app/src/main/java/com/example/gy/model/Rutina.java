@@ -1,26 +1,28 @@
-package com.example.gy;
+package com.example.gy.model;
 
 import android.widget.ImageView;
 
-public class Rutina {
-    private ImageView imagen;
+import java.io.Serializable;
+
+public class Rutina implements Serializable {
+    private int imagen;
     private String nombre, descripcion;
     private int id;
 
     public Rutina() {}
 
-    public Rutina(ImageView imagen, String nombre, String descripcion, int id) {
+    public Rutina(int imagen, String nombre, String descripcion, int id) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.id = id;
     }
 
-    public ImageView getImagen() {
+    public int getImagen() {
         return imagen;
     }
 
-    public void setImagen(ImageView imagen) {
+    public void setImagen(int imagen) {
         this.imagen = imagen;
     }
 
@@ -46,5 +48,15 @@ public class Rutina {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Rutina{" +
+                //"imagen=" + imagen +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

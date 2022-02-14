@@ -1,26 +1,30 @@
-package com.example.gy;
+package com.example.gy.model;
 
 import android.widget.ImageView;
 
-public class Ejercicio {
-    private ImageView imagen;
+import java.io.Serializable;
+
+public class Ejercicio implements Serializable {
+    private int imagen;
     private String nombre;
+    private String descripcion;
     private int id;
 
     public Ejercicio() {
     }
 
-    public Ejercicio(ImageView imagen, String nombre, int id) {
+    public Ejercicio(int imagen, String nombre, String descripcion, int id) {
         this.imagen = imagen;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.id = id;
     }
 
-    public ImageView getImagen() {
+    public int getImagen() {
         return imagen;
     }
 
-    public void setImagen(ImageView imagen) {
+    public void setImagen(int imagen) {
         this.imagen = imagen;
     }
 
@@ -38,5 +42,13 @@ public class Ejercicio {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

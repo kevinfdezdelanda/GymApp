@@ -1,21 +1,26 @@
-package com.example.gy;
+package com.example.gy.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.gy.R;
+import com.example.gy.adaptadores.AdaptadorEjercicios_RecyclerView;
+import com.example.gy.adaptadores.AdaptadorRutinas;
+import com.example.gy.model.Ejercicio;
+import com.example.gy.model.Rutina;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -52,15 +57,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Rutina[] getRutinas(){
-        ImageView img = new ImageView(this);
-        img.setImageResource(R.drawable.pectoral);
 
         Rutina[] rutinasArray = new Rutina[] {
-                new Rutina(img,"Dia pecho 1", "entrenamiento pecho 1", 1),
-                new Rutina(img,"Dia pecho 2", "entrenamiento pecho 2", 2),
-                new Rutina(img,"Dia pecho 3", "entrenamiento pecho 3", 3),
-                new Rutina(img,"Dia pecho 4", "entrenamiento pecho 4", 4),
-                new Rutina(img,"Dia pecho 5", "entrenamiento pecho 5", 5)
+                new Rutina(R.drawable.pectoral,"Dia pecho 1", "entrenamiento pecho 1", 1),
+                new Rutina(R.drawable.pectoral,"Dia pecho 2", "entrenamiento pecho 2", 2),
+                new Rutina(R.drawable.pectoral,"Dia pecho 3", "entrenamiento pecho 3", 3),
+                new Rutina(R.drawable.pectoral,"Dia pecho 4", "entrenamiento pecho 4", 4),
+                new Rutina(R.drawable.pectoral,"Dia pecho 5", "entrenamiento pecho 5", 5)
 
         };
 
@@ -68,16 +71,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public List<Ejercicio> getEjerciciosProgreso(){
-        ImageView img = new ImageView(this);
-        img.setImageResource(R.drawable.pectoral);
-
         List<Ejercicio> ejerciciosList = new ArrayList<>();
 
-        ejerciciosList.add( new Ejercicio(img,"Dia pecho 1", 1));
-        ejerciciosList.add(new Ejercicio(img,"Dia pecho 2", 2));
-        ejerciciosList.add(new Ejercicio(img,"Dia pecho 3", 3));
-        ejerciciosList.add(new Ejercicio(img,"Dia pecho 4", 4));
-        ejerciciosList.add(new Ejercicio(img,"Dia pecho 5", 5));
+        ejerciciosList.add( new Ejercicio(R.drawable.pectoral,"Dia pecho 1","", 1));
+        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 2","", 2));
+        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 3", "",3));
+        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 4","", 4));
+        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 5", "",5));
 
         return ejerciciosList;
     }
@@ -108,10 +108,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                     page= ventanaInicio;
 
-                    listRutinas = (ListView) ventanaInicio.findViewById(R.id.listRutinasInicio);
+                    listRutinas = (ListView) ventanaInicio.findViewById(R.id.listEjercicios);
                     AdaptadorRutinas adaptadorRutinas =
                             new AdaptadorRutinas(ventanaInicio.getContext(), getRutinas());
                     listRutinas.setAdapter(adaptadorRutinas);
+
+                    listRutinas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent,
+                                                View view, int position, long id) {
+                            System.out.println();
+                            Intent i = new Intent(ventanaInicio.getContext(), ComenzarEntrenamiento.class);
+                            i.putExtra("rutina", (Rutina) listRutinas.getAdapter().getItem(position));
+                            startActivity(i);
+                        }
+                    });
 
                     break;
                 case 1:

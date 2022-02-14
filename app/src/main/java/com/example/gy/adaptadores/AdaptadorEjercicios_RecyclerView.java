@@ -1,15 +1,17 @@
-package com.example.gy;
+package com.example.gy.adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.gy.R;
+import com.example.gy.model.Ejercicio;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class AdaptadorEjercicios_RecyclerView extends RecyclerView.Adapter<Adapt
         String nombre = ejercicio.getNombre();
 
         holder.tvNombre.setText(nombre);
-        holder.imIcon.setImageDrawable(ejercicio.getImagen().getDrawable());
+        holder.imIcon.setImageResource(ejercicio.getImagen());
 
     }
 
