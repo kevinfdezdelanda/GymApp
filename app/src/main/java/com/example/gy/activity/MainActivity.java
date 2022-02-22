@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,8 +24,10 @@ import android.widget.ListView;
 import com.example.gy.R;
 import com.example.gy.adaptadores.AdaptadorEjercicios_RecyclerView;
 import com.example.gy.adaptadores.AdaptadorRutinas;
+import com.example.gy.dao.EjercicioDao;
 import com.example.gy.model.Ejercicio;
 import com.example.gy.model.Rutina;
+import com.example.gy.util.GymSQliteHelper;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -34,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
 
-        View decorView = getWindow().getDecorView();
-        // Hide the status bar.
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-        decorView.setSystemUiVisibility(uiOptions);
+        setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         //Asignamos al ViewPager el PageAdapter
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -53,7 +61,12 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_calendar_alt_solid);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_user_solid);
 
+        GymSQliteHelper usdbh = new GymSQliteHelper(this, getString(R.string.bbdd)+"", null, 1);
+        SQLiteDatabase db = usdbh.getWritableDatabase();
 
+        EjercicioDao ejercicioDao = new EjercicioDao();
+        ejercicioDao.crearEjercicio(this, new Ejercicio("pectoral","Dia pecho 1","", 1));
+        System.out.println("Ejercicio:           :"+ejercicioDao.getEjercicios(this).get(0).getNombre());
     }
 
     public Rutina[] getRutinas(){
@@ -73,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
     public List<Ejercicio> getEjerciciosProgreso(){
         List<Ejercicio> ejerciciosList = new ArrayList<>();
 
-        ejerciciosList.add( new Ejercicio(R.drawable.pectoral,"Dia pecho 1","", 1));
-        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 2","", 2));
-        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 3", "",3));
-        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 4","", 4));
-        ejerciciosList.add(new Ejercicio(R.drawable.pectoral,"Dia pecho 5", "",5));
+        ejerciciosList.add( new Ejercicio("pectoral","Dia pecho 1","", 1));
+        ejerciciosList.add(new Ejercicio("pectoral","Dia pecho 2","", 2));
+        ejerciciosList.add(new Ejercicio("pectoral","Dia pecho 3", "",3));
+        ejerciciosList.add(new Ejercicio("pectoral","Dia pecho 4","", 4));
+        ejerciciosList.add(new Ejercicio("pectoral","Dia pecho 5", "",5));
 
         return ejerciciosList;
     }
@@ -108,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     page= ventanaInicio;
 
-                    listRutinas = (ListView) ventanaInicio.findViewById(R.id.listEjercicios);
+                    listRutinas = (ListView) ventanaInicio.findViewById(R.id.listRutina);
                     AdaptadorRutinas adaptadorRutinas =
                             new AdaptadorRutinas(ventanaInicio.getContext(), getRutinas());
                     listRutinas.setAdapter(adaptadorRutinas);
@@ -167,17 +180,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
+
 }

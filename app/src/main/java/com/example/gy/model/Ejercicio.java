@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import java.io.Serializable;
 
 public class Ejercicio implements Serializable {
-    private int imagen;
+    private String imagen;
     private String nombre;
     private String descripcion;
     private int id;
@@ -13,18 +13,18 @@ public class Ejercicio implements Serializable {
     public Ejercicio() {
     }
 
-    public Ejercicio(int imagen, String nombre, String descripcion, int id) {
+    public Ejercicio(String imagen, String nombre, String descripcion, int id) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.id = id;
     }
 
-    public int getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 

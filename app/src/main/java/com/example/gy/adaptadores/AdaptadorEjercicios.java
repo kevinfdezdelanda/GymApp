@@ -1,6 +1,7 @@
 package com.example.gy.adaptadores;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,12 @@ import java.util.List;
 public class AdaptadorEjercicios extends ArrayAdapter<Ejercicio> {
 
     private List<Ejercicio> ejercicios;
+    private Context context;
 
     public AdaptadorEjercicios(@NonNull Context context, List<Ejercicio> Ejercicios) {
         super(context, R.layout.list_rutina_ejercicio_layout, Ejercicios);
         this.ejercicios = Ejercicios;
+        this.context = context;
     }
 
     @NonNull
@@ -37,7 +40,11 @@ public class AdaptadorEjercicios extends ArrayAdapter<Ejercicio> {
         TextView descripcion = (TextView)item.findViewById(R.id.descripcion);
         descripcion.setText(ejercicios.get(position).getDescripcion());
         ImageView img = (ImageView)item.findViewById(R.id.img);
-        img.setImageResource(ejercicios.get(position).getImagen());
+
+        Resources res = context.getResources();
+        int resID = res.getIdentifier(ejercicios.get(position).getImagen(), "drawable", context.getPackageName());
+        img.setImageResource(resID);
+
         return (item);
     }
 }

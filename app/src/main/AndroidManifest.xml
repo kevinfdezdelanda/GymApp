@@ -22,6 +22,9 @@
         <activity
             android:name=".activity.ComenzarEntrenamiento" />
 
+        <activity
+            android:name=".activity.EntrenamientoEjercicio" />
+
     </application>
 
 </manifest>

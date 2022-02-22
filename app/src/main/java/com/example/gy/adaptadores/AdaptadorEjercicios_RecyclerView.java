@@ -1,6 +1,7 @@
 package com.example.gy.adaptadores;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,11 @@ public class AdaptadorEjercicios_RecyclerView extends RecyclerView.Adapter<Adapt
         String nombre = ejercicio.getNombre();
 
         holder.tvNombre.setText(nombre);
-        holder.imIcon.setImageResource(ejercicio.getImagen());
+
+        Resources res = context.getResources();
+        int resID = res.getIdentifier(ejercicio.getImagen(), "drawable", context.getPackageName());
+
+        holder.imIcon.setImageResource(resID);
 
     }
 

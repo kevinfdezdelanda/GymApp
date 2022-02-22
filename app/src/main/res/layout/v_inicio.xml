@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <ListView
-            android:id="@+id/listEjercicios"
+            android:id="@+id/listRutina"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -73,7 +73,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listEjercicios">
+            app:layout_constraintTop_toBottomOf="@+id/listRutina">
 
             <Button
                 android:id="@+id/btnNuevaRutina"
