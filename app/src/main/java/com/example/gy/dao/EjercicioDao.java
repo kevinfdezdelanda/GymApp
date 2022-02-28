@@ -14,7 +14,13 @@ import java.util.ArrayList;
 
 public class EjercicioDao {
 
-    public ArrayList<Ejercicio> getEjercicios(Context contexto){
+    private Context contexto;
+
+    public EjercicioDao(Context contexto){
+        this.contexto = contexto;
+    }
+
+    public ArrayList<Ejercicio> getEjercicios(){
         ArrayList<Ejercicio> ejercicios = new ArrayList<>();
 
         //Abrimos la base de datos "DBUsuarios" en modo de escritura
@@ -52,7 +58,7 @@ public class EjercicioDao {
         return ejercicios;
     }
 
-    public boolean crearEjercicio(Context contexto, Ejercicio ejercicio){
+    public boolean crearEjercicio(Ejercicio ejercicio){
         GymSQliteHelper usdbh =
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
 
@@ -68,7 +74,11 @@ public class EjercicioDao {
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert("ejercicio", null, values);
 
-        return true;
+        if(newRowId != -1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

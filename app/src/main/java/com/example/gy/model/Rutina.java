@@ -5,24 +5,23 @@ import android.widget.ImageView;
 import java.io.Serializable;
 
 public class Rutina implements Serializable {
-    private int imagen;
-    private String nombre, descripcion;
+    private String nombre, descripcion, imagen;
     private int id;
 
     public Rutina() {}
 
-    public Rutina(int imagen, String nombre, String descripcion, int id) {
+    public Rutina(String imagen, String nombre, String descripcion, int id) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.id = id;
     }
 
-    public int getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 

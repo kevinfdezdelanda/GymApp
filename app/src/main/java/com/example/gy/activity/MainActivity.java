@@ -64,21 +64,19 @@ public class MainActivity extends AppCompatActivity {
         GymSQliteHelper usdbh = new GymSQliteHelper(this, getString(R.string.bbdd)+"", null, 1);
         SQLiteDatabase db = usdbh.getWritableDatabase();
 
-        EjercicioDao ejercicioDao = new EjercicioDao();
-        ejercicioDao.crearEjercicio(this, new Ejercicio("pectoral","Dia pecho 1","", 1));
-        System.out.println("Ejercicio:           :"+ejercicioDao.getEjercicios(this).get(0).getNombre());
+
     }
 
-    public Rutina[] getRutinas(){
+    public ArrayList<Rutina> getRutinas(){
 
-        Rutina[] rutinasArray = new Rutina[] {
-                new Rutina(R.drawable.pectoral,"Dia pecho 1", "entrenamiento pecho 1", 1),
-                new Rutina(R.drawable.pectoral,"Dia pecho 2", "entrenamiento pecho 2", 2),
-                new Rutina(R.drawable.pectoral,"Dia pecho 3", "entrenamiento pecho 3", 3),
-                new Rutina(R.drawable.pectoral,"Dia pecho 4", "entrenamiento pecho 4", 4),
-                new Rutina(R.drawable.pectoral,"Dia pecho 5", "entrenamiento pecho 5", 5)
+        ArrayList<Rutina> rutinasArray = new ArrayList<>();
+        rutinasArray.add(new Rutina("pectoral","Dia pecho 1", "entrenamiento pecho 1", 1));
+        rutinasArray.add(new Rutina("pectoral","Dia pecho 2", "entrenamiento pecho 2", 2));
+        rutinasArray.add(new Rutina("pectoral","Dia pecho 3", "entrenamiento pecho 3", 3));
+        rutinasArray.add(new Rutina("pectoral","Dia pecho 4", "entrenamiento pecho 4", 4));
+        rutinasArray.add(new Rutina("pectoral","Dia pecho 5", "entrenamiento pecho 5", 5));
 
-        };
+
 
         return rutinasArray;
     }
