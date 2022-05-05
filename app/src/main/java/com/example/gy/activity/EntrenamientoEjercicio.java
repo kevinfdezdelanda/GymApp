@@ -42,10 +42,13 @@ public class EntrenamientoEjercicio extends AppCompatActivity {
         nombreEj.setText(ejercicio.getNombre());
         ImageView img = (ImageView)findViewById(R.id.imgEj);
 
-        Resources res = getResources();
-        int resID = res.getIdentifier(ejercicio.getImagen(), "drawable", getPackageName());
+        try{
+            Resources res = getResources();
+            int resID = res.getIdentifier(ejercicio.getImagen(), "drawable", getPackageName());
+            img.setImageResource(resID);
+        }catch (Exception e){
 
-        img.setImageResource(resID);
+        }
 
         listSeries = (ListView) findViewById(R.id.listSeries);
         AdaptadorSeries adaptadorSeries =
