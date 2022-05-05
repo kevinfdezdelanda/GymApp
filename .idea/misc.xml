@@ -24,6 +24,21 @@
         <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_inicio.xml" value="0.33" />
         <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_progreso.xml" value="0.27853260869565216" />
         <entry key="..\:/Users/KevinF/Desktop/GymApp/app/src/main/res/layout/v_usuario.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/activity_main.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/comenzar_entrenamiento.xml" value="0.2" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/crear_editar_ejercicio.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/crear_editar_rutina.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/crear_rutina.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/gestionar_ejercicios.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/gestionar_ejercicios_rutina.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/list_ejercicio.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/list_rutina_ejercicio_layout.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/list_serie.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/nuevo_ejercicio.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/v_entrenamiento_ejercicio.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/v_inicio.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/v_progreso.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/kevin/Desktop/carpetaGit/GymApp/app/src/main/res/layout/v_usuario.xml" value="0.24547101449275363" />
         <entry key="app/src/main/res/layout/list_serie.xml" value="0.33" />
         <entry key="app/src/main/res/layout/v_entrenamiento_ejercicio.xml" value="0.3651041666666667" />
       </map>

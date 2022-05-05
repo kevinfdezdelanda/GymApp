@@ -39,12 +39,15 @@ public class AdaptadorRutinas extends ArrayAdapter<Rutina> {
         nombre.setText(rutinas.get(position).getNombre());
         TextView descripcion = (TextView)item.findViewById(R.id.descripcion);
         descripcion.setText(rutinas.get(position).getDescripcion());
-        ImageView img = (ImageView)item.findViewById(R.id.img);
+        ImageView img = (ImageView)item.findViewById(R.id.imgSubidaEjercicio);
 
         Resources res = context.getResources();
-        int resID = res.getIdentifier(rutinas.get(position).getImagen(), "drawable", context.getPackageName());
-        img.setImageResource(resID);
+        try {
+            int resID = res.getIdentifier(rutinas.get(position).getImagen(), "drawable", context.getPackageName());
+            img.setImageResource(resID);
+        }catch (Exception e){
 
+        }
         return (item);
     }
 }

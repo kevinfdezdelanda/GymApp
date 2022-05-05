@@ -25,6 +25,18 @@
         <activity
             android:name=".activity.EntrenamientoEjercicio" />
 
+        <activity
+            android:name=".activity.CrearEditarRutina" />
+
+        <activity
+            android:name=".activity.GestionarEjerciciosRutina" />
+
+        <activity
+            android:name=".activity.CrearEditarEjercicio" />
+
+        <activity
+            android:name=".activity.GestionarEjercicios" />
+
     </application>
 
 </manifest>

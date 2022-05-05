@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.48000002">
 
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/imgSubidaEjercicio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"

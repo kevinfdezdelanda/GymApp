@@ -38,6 +38,12 @@ public class GymSQliteHelper extends SQLiteOpenHelper {
             "  'peso' double NOT NULL\n" +
             ")";
 
+    String sqlCreateRutinaEjercicio = "CREATE TABLE 'rutina_ejercicio' (\n" +
+            "  'id_rutina' INTEGER,\n" +
+            "  'id_ejercicio' INTEGER,\n" +
+            "   PRIMARY KEY (id_rutina, id_ejercicio)\n"+
+            ")";
+
 
     public GymSQliteHelper(Context contexto, String nombre,
                            SQLiteDatabase.CursorFactory factory, int version) {
@@ -51,6 +57,7 @@ public class GymSQliteHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateEntrenamiento);
         db.execSQL(sqlCreateRutina);
         db.execSQL(sqlCreateSerie);
+        db.execSQL(sqlCreateRutinaEjercicio);
         db.execSQL("COMMIT");
     }
 

@@ -7,24 +7,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.gy.R;
 import com.example.gy.adaptadores.AdaptadorEjercicios_RecyclerView;
 import com.example.gy.adaptadores.AdaptadorRutinas;
-import com.example.gy.dao.EjercicioDao;
+import com.example.gy.dao.RutinaDao;
 import com.example.gy.model.Ejercicio;
 import com.example.gy.model.Rutina;
 import com.example.gy.util.GymSQliteHelper;
@@ -37,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listRutinas;
     private RecyclerView listEjerciciosProgreso;
+    private AdaptadorRutinas adaptadorRutinas;
+    private RutinaDao rd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,23 +62,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_user_solid);
 
         GymSQliteHelper usdbh = new GymSQliteHelper(this, getString(R.string.bbdd)+"", null, 1);
-        SQLiteDatabase db = usdbh.getWritableDatabase();
 
-
-    }
-
-    public ArrayList<Rutina> getRutinas(){
-
-        ArrayList<Rutina> rutinasArray = new ArrayList<>();
-        rutinasArray.add(new Rutina("pectoral","Dia pecho 1", "entrenamiento pecho 1", 1));
-        rutinasArray.add(new Rutina("pectoral","Dia pecho 2", "entrenamiento pecho 2", 2));
-        rutinasArray.add(new Rutina("pectoral","Dia pecho 3", "entrenamiento pecho 3", 3));
-        rutinasArray.add(new Rutina("pectoral","Dia pecho 4", "entrenamiento pecho 4", 4));
-        rutinasArray.add(new Rutina("pectoral","Dia pecho 5", "entrenamiento pecho 5", 5));
-
-
-
-        return rutinasArray;
+        rd = new RutinaDao(MainActivity.this);
     }
 
     public List<Ejercicio> getEjerciciosProgreso(){
@@ -119,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                     page= ventanaInicio;
 
-                    listRutinas = (ListView) ventanaInicio.findViewById(R.id.listRutina);
-                    AdaptadorRutinas adaptadorRutinas =
-                            new AdaptadorRutinas(ventanaInicio.getContext(), getRutinas());
+                    listRutinas = (ListView) ventanaInicio.findViewById(R.id.listEjercicios);
+                    adaptadorRutinas =
+                            new AdaptadorRutinas(ventanaInicio.getContext(), rd.getRutinas());
                     listRutinas.setAdapter(adaptadorRutinas);
 
                     listRutinas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,6 +119,17 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(i);
                         }
                     });
+
+                    Button btnNuevaRutina = (Button) ventanaInicio.findViewById(R.id.btnNuevaRutina);
+                    btnNuevaRutina.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(ventanaInicio.getContext(), CrearEditarRutina.class);
+                            i.putExtra("rutina", (Rutina) null);
+                            startActivityForResult(i,1234);
+                        }
+                    });
+
 
                     break;
                 case 1:
@@ -178,5 +174,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
+        adaptadorRutinas.clear();
+        adaptadorRutinas.addAll(rd.getRutinas());
+    }
 }

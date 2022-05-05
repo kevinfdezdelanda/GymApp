@@ -39,11 +39,11 @@ public class AdaptadorEjercicios extends ArrayAdapter<Ejercicio> {
         nombre.setText(ejercicios.get(position).getNombre());
         TextView descripcion = (TextView)item.findViewById(R.id.descripcion);
         descripcion.setText(ejercicios.get(position).getDescripcion());
-        ImageView img = (ImageView)item.findViewById(R.id.img);
+        ImageView img = (ImageView)item.findViewById(R.id.imgSubidaEjercicio);
 
         Resources res = context.getResources();
-        int resID = res.getIdentifier(ejercicios.get(position).getImagen(), "drawable", context.getPackageName());
-        img.setImageResource(resID);
+        //int resID = res.getIdentifier(ejercicios.get(position).getImagen(), "drawable", context.getPackageName());
+        //img.setImageResource(resID);
 
         return (item);
     }
