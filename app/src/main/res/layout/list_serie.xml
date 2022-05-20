@@ -13,20 +13,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtNumSerie"
+            android:id="@+id/numSerie"
             android:layout_width="20dp"
             android:layout_height="27dp"
             android:layout_marginStart="4dp"
             android:text="1"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPeso"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
+            app:layout_constraintTop_toTopOf="@+id/txtPeso"
             app:layout_constraintVertical_bias="0.592" />
 
         <TextView
-            android:id="@+id/txtNumSerie2"
+            android:id="@+id/txtkg"
             android:layout_width="30dp"
             android:layout_height="37dp"
             android:layout_marginStart="4dp"
@@ -35,8 +35,8 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/color3"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
-            app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPeso"
+            app:layout_constraintStart_toEndOf="@+id/txtPeso"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -49,13 +49,13 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/color3"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPeso"
+            app:layout_constraintStart_toEndOf="@+id/txtRm"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.461" />
 
         <TextView
-            android:id="@+id/txtNumSerie3"
+            android:id="@+id/txtReps3"
             android:layout_width="38dp"
             android:layout_height="36dp"
             android:layout_marginStart="4dp"
@@ -64,37 +64,37 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/color3"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal2"
-            app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal2"
-            app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal2"
+            app:layout_constraintBottom_toBottomOf="@+id/txtRepeticiones"
+            app:layout_constraintStart_toEndOf="@+id/txtRepeticiones"
+            app:layout_constraintTop_toTopOf="@+id/txtRepeticiones"
             app:layout_constraintVertical_bias="0.416" />
 
         <EditText
-            android:id="@+id/editTextNumberDecimal"
+            android:id="@+id/txtPeso"
             android:layout_width="69dp"
             android:layout_height="47dp"
             android:layout_marginStart="4dp"
             android:ems="10"
             android:inputType="numberDecimal"
-            app:layout_constraintStart_toEndOf="@+id/txtNumSerie"
+            app:layout_constraintStart_toEndOf="@+id/numSerie"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/editTextNumberDecimal2"
+            android:id="@+id/txtRepeticiones"
             android:layout_width="69dp"
             android:layout_height="49dp"
             android:layout_marginStart="4dp"
             android:ems="10"
             android:inputType="numberDecimal"
-            app:layout_constraintBottom_toBottomOf="@+id/txtNumSerie"
-            app:layout_constraintStart_toEndOf="@+id/txtNumSerie2"
-            app:layout_constraintTop_toTopOf="@+id/txtNumSerie"
+            app:layout_constraintBottom_toBottomOf="@+id/numSerie"
+            app:layout_constraintStart_toEndOf="@+id/txtkg"
+            app:layout_constraintTop_toTopOf="@+id/numSerie"
             app:layout_constraintVertical_bias="0.619"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtRm"
             android:layout_width="73dp"
             android:layout_height="48dp"
             android:layout_marginStart="4dp"
@@ -102,9 +102,9 @@
             android:text="18kg"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal2"
-            app:layout_constraintStart_toEndOf="@+id/txtNumSerie3"
-            app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal2" />
+            app:layout_constraintBottom_toBottomOf="@+id/txtRepeticiones"
+            app:layout_constraintStart_toEndOf="@+id/txtReps3"
+            app:layout_constraintTop_toTopOf="@+id/txtRepeticiones" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

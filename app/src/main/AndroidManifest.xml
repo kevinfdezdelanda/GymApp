@@ -37,6 +37,9 @@
         <activity
             android:name=".activity.GestionarEjercicios" />
 
+        <activity
+            android:name=".activity.EntrenamientoEmpezado" />
+
     </application>
 
 </manifest>

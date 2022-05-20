@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Oculata la barra de titulo
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         rd = new RutinaDao(MainActivity.this);
     }
 
+    //Ejercicios de ejemplo para la pestaña de progreso
     public List<Ejercicio> getEjerciciosProgreso(){
         List<Ejercicio> ejerciciosList = new ArrayList<>();
 
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                             new AdaptadorRutinas(ventanaInicio.getContext(), rd.getRutinas());
                     listRutinas.setAdapter(adaptadorRutinas);
 
+                    //Abre la ventana de la rutina
                     listRutinas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent,
@@ -120,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    //abre la ventana para crear una rutina
                     Button btnNuevaRutina = (Button) ventanaInicio.findViewById(R.id.btnNuevaRutina);
                     btnNuevaRutina.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -130,6 +135,16 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    //Abre la ventana para gestionar los ejercicios
+                    Button btnGestionarEj = (Button) ventanaInicio.findViewById(R.id.btnGestionarEjercicios);
+                    btnGestionarEj.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(ventanaInicio.getContext(), GestionarEjercicios.class);
+                            i.putExtra("rutina", (Rutina) null);
+                            startActivity(i);
+                        }
+                    });
 
                     break;
                 case 1:
@@ -140,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     page= ventanaProgreso;
 
+                    //Carga la lista con los ejercicios de ejemplo
                     listEjerciciosProgreso = (RecyclerView) ventanaProgreso.findViewById(R.id.listEjerciciosEvolucion);
                     listEjerciciosProgreso.setLayoutManager(new GridLayoutManager(ventanaProgreso.getContext(), 3));
                     AdaptadorEjercicios_RecyclerView adaptadorEjrecicios =
@@ -174,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Recarga la lista de rutinas cuando se haya creado una
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);

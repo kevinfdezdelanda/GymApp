@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,8 @@ public class CrearEditarRutina extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Oculta la barra del titulo
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -40,6 +44,13 @@ public class CrearEditarRutina extends AppCompatActivity {
 
         Rutina rutina = (Rutina) getIntent().getSerializableExtra("rutina");
 
+        // Si se esta editando la rutina cambia el titulo de la ventana
+        TextView txtTitulo = (TextView) this.findViewById(R.id.txtTitulo);
+        if(rutina!=null){
+            txtTitulo.setText("Editar Rutina");
+        }
+
+        //Abre la galeria para seleccionar una foto
         btnSubirFoto = (Button) this.findViewById(R.id.btnSubirFoto);
         btnSubirFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +62,7 @@ public class CrearEditarRutina extends AppCompatActivity {
         txtNombreRutina = (EditText) this.findViewById(R.id.txtNombreEjercicio);
         txtDescripcionRutina = (EditText) this.findViewById(R.id.txtDescripcionEjercicio);
 
+        //Comprueba los datos y guarda o edita la rutina
         btnGuardarRutina = (Button) this.findViewById(R.id.btnGuardarEjercicio);
         btnGuardarRutina.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,17 +73,35 @@ public class CrearEditarRutina extends AppCompatActivity {
                 String descripcion = txtDescripcionRutina.getText().toString();
 
                 if(nombre.equals("")||descripcion.equals("")){
-
+                    Toast toast1 = Toast.makeText(getApplicationContext(),
+                            "Los campos nombre y descripcion no pueden estar vacios", Toast.LENGTH_SHORT);
+                    toast1.show();
                 }else{
                     Rutina r = new Rutina();
                     r.setNombre(nombre);
                     r.setDescripcion(descripcion);
 
                     if(rutina == null){
-                        rd.crearRutina(r);
+                        if(rd.crearRutina(r)){
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Rutina creada", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }else{
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Error al crear la rutina", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }
                     }else{
                         r.setId(rutina.getId());
-                        rd.editarRutina(r);
+                        if(rd.editarRutina(r)){
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Rutina editada", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }else{
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Error al editar la rutina", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }
                     }
 
                     finish();
@@ -81,12 +111,14 @@ public class CrearEditarRutina extends AppCompatActivity {
             }
         });
 
+        // Si se esta editando la rutina se escriben sus datos en los campos
         if(rutina!=null){
             txtNombreRutina.setText(rutina.getNombre());
             txtDescripcionRutina.setText(rutina.getDescripcion());
         }
     }
 
+    //Abre la galeria
     public void abrirGaleria(View v){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -96,6 +128,7 @@ public class CrearEditarRutina extends AppCompatActivity {
                 SELECT_FILE);
     }
 
+    //Carga la imagen seleccionada
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);

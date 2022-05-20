@@ -16,6 +16,7 @@ import com.example.gy.model.Ejercicio;
 
 import java.util.List;
 
+//Adaptador para la lista de los ejercicios de la pestaña de progreso
 public class AdaptadorEjercicios_RecyclerView extends RecyclerView.Adapter<AdaptadorEjercicios_RecyclerView.AdaptadorEjercicios_RecyclerViewVh> {
 
     private List<Ejercicio> EjercicioList;

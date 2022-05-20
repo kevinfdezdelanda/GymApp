@@ -20,6 +20,7 @@ public class RutinaDao {
         this.contexto = contexto;
     }
 
+    //Obtiene todas las rutinas
     public ArrayList<Rutina> getRutinas(){
         ArrayList<Rutina> rutinas = new ArrayList<>();
 
@@ -28,7 +29,7 @@ public class RutinaDao {
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
 
         SQLiteDatabase db = usdbh.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM rutina ",null );
+        Cursor c = db.rawQuery("SELECT * FROM rutina where visible = true",null );
 
         //Recorremos los resultados para mostrarlos en pantalla
         //Nos aseguramos de que existe al menos un registro
@@ -58,6 +59,7 @@ public class RutinaDao {
         return rutinas;
     }
 
+    //Obtiene los datos de la rutina pasada como argumento
     public Rutina getRutina(Rutina r){
         //Abrimos la base de datos "DBUsuarios" en modo de escritura
         GymSQliteHelper usdbh =
@@ -93,6 +95,7 @@ public class RutinaDao {
 
     }
 
+    //Crea una nueva rutina
     public boolean crearRutina(Rutina rutina){
         GymSQliteHelper usdbh =
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
@@ -105,6 +108,7 @@ public class RutinaDao {
         values.put("imagen", rutina.getImagen());
         values.put("nombre", rutina.getNombre());
         values.put("descripcion", rutina.getDescripcion());
+        values.put("visible",true);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert("Rutina", null, values);
@@ -117,6 +121,7 @@ public class RutinaDao {
 
     }
 
+    //Añade el ejercicio a la rutina
     public boolean aniadirEjercicio(Rutina r, Ejercicio e){
         GymSQliteHelper usdbh =
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
@@ -139,6 +144,7 @@ public class RutinaDao {
         }
     }
 
+    //Quita el ejercicio de la rutina
     public boolean quitarEjercicio(Rutina r, Ejercicio e){
         GymSQliteHelper usdbh =
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
@@ -150,6 +156,7 @@ public class RutinaDao {
         return db.delete("rutina_ejercicio", "id_rutina" + "=" + r.getId() + " and " + "id_ejercicio" + "=" + e.getId(), null) > 0;
     }
 
+    //Edita la rutina
     public boolean editarRutina(Rutina r){
         GymSQliteHelper usdbh =
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
@@ -162,7 +169,22 @@ public class RutinaDao {
         cv.put("descripcion", r.getDescripcion());
 
         boolean b =  db.update("rutina", cv, "id_rutina = "+r.getId(), null)>0;
-        db.execSQL("Update rutina set nombre = '"+r.getNombre()+"', descripcion = '"+r.getDescripcion()+"' where id_rutina = "+r.getId());
+
+        return b;
+    }
+
+    //Borra la rutina
+    public boolean borrarRutina(Rutina r){
+        GymSQliteHelper usdbh =
+                new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = usdbh.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("visible", false); //These Fields should be your String values of actual column names
+
+        boolean b =  db.update("rutina", cv, "id_rutina = "+r.getId(), null)>0;
 
         return b;
     }

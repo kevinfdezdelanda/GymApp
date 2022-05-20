@@ -21,6 +21,7 @@ public class EjercicioDao {
         this.contexto = contexto;
     }
 
+    //Obtiene todos los ejercicios
     public ArrayList<Ejercicio> getEjercicios(){
         ArrayList<Ejercicio> ejercicios = new ArrayList<>();
 
@@ -29,7 +30,7 @@ public class EjercicioDao {
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
 
         SQLiteDatabase db = usdbh.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM ejercicio ",null );
+        Cursor c = db.rawQuery("SELECT * FROM ejercicio where visible = true",null );
 
         //Recorremos los resultados para mostrarlos en pantalla
         //Nos aseguramos de que existe al menos un registro
@@ -40,7 +41,7 @@ public class EjercicioDao {
                 int id = c.getInt(0);
                 String imagen =c.getString(1);
                 String nombre = c.getString(2);
-                String descripcion = c.getString(2);
+                String descripcion = c.getString(3);
 
                 ej = new Ejercicio();
                 ej.setId(id);
@@ -59,6 +60,7 @@ public class EjercicioDao {
         return ejercicios;
     }
 
+    //Obtiene los ejercicios de la rutina
     public ArrayList<Ejercicio> getEjerciciosRutina(Rutina rutina){
         ArrayList<Ejercicio> ejercicios = new ArrayList<>();
 
@@ -67,7 +69,7 @@ public class EjercicioDao {
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
 
         SQLiteDatabase db = usdbh.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT e.* FROM ejercicio e, rutina_ejercicio re where e.id_ejercicio = re.id_ejercicio and re.id_rutina = " + rutina.getId(),null );
+        Cursor c = db.rawQuery("SELECT e.* FROM ejercicio e, rutina_ejercicio re where visible = true and e.id_ejercicio = re.id_ejercicio and re.id_rutina = " + rutina.getId(),null );
 
         //Recorremos los resultados para mostrarlos en pantalla
         //Nos aseguramos de que existe al menos un registro
@@ -78,7 +80,7 @@ public class EjercicioDao {
                 int id = c.getInt(0);
                 String imagen =c.getString(1);
                 String nombre = c.getString(2);
-                String descripcion = c.getString(2);
+                String descripcion = c.getString(3);
 
                 ej = new Ejercicio();
                 ej.setId(id);
@@ -97,6 +99,7 @@ public class EjercicioDao {
         return ejercicios;
     }
 
+    //Crea un nuevo ejercicio
     public boolean crearEjercicio(Ejercicio ejercicio){
         GymSQliteHelper usdbh =
                 new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
@@ -109,6 +112,7 @@ public class EjercicioDao {
         values.put("imagen", ejercicio.getImagen());
         values.put("nombre", ejercicio.getNombre());
         values.put("descripcion", ejercicio.getDescripcion());
+        values.put("visible", true);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert("ejercicio", null, values);
@@ -120,6 +124,37 @@ public class EjercicioDao {
         }
     }
 
+    //Edita el ejercicio
+    public boolean editarEjecicio(Ejercicio e){
+        GymSQliteHelper usdbh =
+                new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
 
+        // Gets the data repository in write mode
+        SQLiteDatabase db = usdbh.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("nombre", e.getNombre()); //These Fields should be your String values of actual column names
+        cv.put("descripcion", e.getDescripcion());
+
+        boolean b =  db.update("ejercicio", cv, "id_ejercicio = "+e.getId(), null)>0;
+
+        return b;
+    }
+
+    //Borra el ejercicio
+    public boolean borrarEjercicio(Ejercicio e){
+        GymSQliteHelper usdbh =
+                new GymSQliteHelper(contexto, contexto.getString(R.string.bbdd), null, 1);
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = usdbh.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("visible", false); //These Fields should be your String values of actual column names
+
+        boolean b =  db.update("ejercicio", cv, "id_ejercicio = "+e.getId(), null)>0;
+
+        return b;
+    }
 
 }

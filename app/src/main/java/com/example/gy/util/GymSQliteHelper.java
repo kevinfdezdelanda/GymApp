@@ -12,7 +12,8 @@ public class GymSQliteHelper extends SQLiteOpenHelper {
                     "  'id_ejercicio'  INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                     "  'imagen' varchar(50),\n" +
                     "  'nombre' varchar(25) NOT NULL,\n" +
-                    "  'descripcion' varchar(50) NOT NULL\n" +
+                    "  'descripcion' varchar(50) NOT NULL,\n" +
+                    "  'visible' boolean\n" +
                     ")";
 
     String sqlCreateEntrenamiento =
@@ -27,7 +28,8 @@ public class GymSQliteHelper extends SQLiteOpenHelper {
             "  'id_rutina' INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "  'nombre' varchar(25) NOT NULL,\n" +
             "  'descripcion' varchar(50) NOT NULL,\n" +
-            "  'imagen' varchar(50)\n" +
+            "  'imagen' varchar(50),\n" +
+            "  'visible' boolean\n" +
             ")";
 
     String sqlCreateSerie = "CREATE TABLE 'serie' (\n" +
@@ -50,6 +52,7 @@ public class GymSQliteHelper extends SQLiteOpenHelper {
         super(contexto, nombre, factory, version);
     }
 
+    //Crea la BBDD y las tablas
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Se ejecuta la sentencia SQL de creación de la tabla

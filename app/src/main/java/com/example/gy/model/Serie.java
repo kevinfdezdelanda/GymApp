@@ -1,23 +1,26 @@
 package com.example.gy.model;
 
-public class Serie {
+import java.io.Serializable;
+
+public class Serie implements Serializable {
     private int reps, numSerie, id;
     private double peso, rm;
-    private Entrenamiento entrenamiento;
 
-    public Serie(int reps, int numSerie, int id, double peso, double rm, Entrenamiento entrenamiento) {
+
+    public Serie(int reps, int numSerie, int id, double peso) {
         this.reps = reps;
         this.numSerie = numSerie;
         this.id = id;
         this.peso = peso;
-        this.entrenamiento = entrenamiento;
         calcular1rm();
     }
 
     public Serie(){}
 
     public void calcular1rm(){
-        rm = (0.0333 *  peso) * reps + peso;
+        Double value = (0.0333 *  peso) * reps + peso;
+        double scale = Math.pow(10, 2);
+        rm = Math.round(value * scale) / scale;
     }
 
     public int getReps() {
@@ -58,13 +61,5 @@ public class Serie {
 
     public void setRm(double rm) {
         this.rm = rm;
-    }
-
-    public Entrenamiento getEntrenamiento() {
-        return entrenamiento;
-    }
-
-    public void setEntrenamiento(Entrenamiento entrenamiento) {
-        this.entrenamiento = entrenamiento;
     }
 }

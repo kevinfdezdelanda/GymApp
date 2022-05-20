@@ -1,12 +1,15 @@
 package com.example.gy.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Entrenamiento {
+public class Entrenamiento implements Serializable {
     private int id;
     private Ejercicio ejercicio;
     private String nota;
     private Date fecha;
+    private ArrayList<Serie> series;
 
     public Entrenamiento(int id, Ejercicio ejercicio, String nota, Date fecha) {
         this.id = id;
@@ -47,5 +50,13 @@ public class Entrenamiento {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public ArrayList<Serie> getSeries() {
+        return series;
+    }
+
+    public void setSeries(ArrayList<Serie> series) {
+        this.series = series;
     }
 }

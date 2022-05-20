@@ -17,6 +17,7 @@ import com.example.gy.model.Rutina;
 
 import java.util.ArrayList;
 
+//Adaptador para la lista de las rutinas
 public class AdaptadorRutinas extends ArrayAdapter<Rutina> {
 
     private ArrayList<Rutina> rutinas;

@@ -12,12 +12,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gy.R;
 import com.example.gy.dao.EjercicioDao;
 import com.example.gy.model.Ejercicio;
+import com.example.gy.model.Rutina;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -31,6 +34,8 @@ public class CrearEditarEjercicio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Oculta la barra del titulo
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -38,7 +43,15 @@ public class CrearEditarEjercicio extends AppCompatActivity {
         setContentView(R.layout.crear_editar_ejercicio);
         getSupportActionBar().hide();
 
+        Ejercicio ejercicio = (Ejercicio) getIntent().getSerializableExtra("ejercicio");
 
+        // Si se esta editando el ejercicio cambia el titulo de la ventana
+        TextView txtTitulo = (TextView) this.findViewById(R.id.txtTitulo);
+        if(ejercicio!=null){
+            txtTitulo.setText("Editar Ejercicio");
+        }
+
+        //Abre la galeria para seleccionar una foto
         btnSubirFoto = (Button) this.findViewById(R.id.btnSubirFoto);
         btnSubirFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +63,7 @@ public class CrearEditarEjercicio extends AppCompatActivity {
         txtNombreEjercicio = (EditText) this.findViewById(R.id.txtNombreEjercicio);
         txtDescripcionEjercicio = (EditText) this.findViewById(R.id.txtDescripcionEjercicio);
 
+        //Comprueba los datos y guarda o edita el ejercicio
         btnGuardarEjercicio = (Button) this.findViewById(R.id.btnGuardarEjercicio);
         btnGuardarEjercicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,20 +74,52 @@ public class CrearEditarEjercicio extends AppCompatActivity {
                 String descripcion = txtDescripcionEjercicio.getText().toString();
 
                 if(nombre.equals("")||descripcion.equals("")){
-
+                    Toast toast1 = Toast.makeText(getApplicationContext(),
+                            "Los campos nombre y descripcion no pueden estar vacios", Toast.LENGTH_SHORT);
+                    toast1.show();
                 }else{
                     Ejercicio r = new Ejercicio();
                     r.setNombre(nombre);
                     r.setDescripcion(descripcion);
-                    rd.crearEjercicio(r);
+
+                    if(ejercicio == null){
+                        if(rd.crearEjercicio(r)){
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Ejercicio creado", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }else{
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Error al crear el ejercicio", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }
+                    }else{
+                        r.setId(ejercicio.getId());
+                        if(rd.editarEjecicio(r)){
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Ejercicio editado", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }else{
+                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                    "Error al editar el ejercicio", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }
+                    }
+
                     finish();
                 }
 
 
             }
         });
+
+        // Si se esta editando el ejercicio se escriben sus datos en los campos
+        if(ejercicio!=null){
+            txtNombreEjercicio.setText(ejercicio.getNombre());
+            txtDescripcionEjercicio.setText(ejercicio.getDescripcion());
+        }
     }
 
+    //Abre la galeria
     public void abrirGaleria(View v){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -83,6 +129,7 @@ public class CrearEditarEjercicio extends AppCompatActivity {
                 SELECT_FILE);
     }
 
+    //Carga la imagen seleccionada
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);

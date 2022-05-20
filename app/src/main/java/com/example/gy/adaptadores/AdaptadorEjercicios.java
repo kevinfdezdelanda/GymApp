@@ -1,5 +1,6 @@
 package com.example.gy.adaptadores;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import com.example.gy.model.Ejercicio;
 
 import java.util.List;
 
+//Adaptador para la lista de los ejercicios
+@SuppressLint({"ViewHolder", "InflateParams"})
 public class AdaptadorEjercicios extends ArrayAdapter<Ejercicio> {
 
     private List<Ejercicio> ejercicios;
